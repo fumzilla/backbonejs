@@ -1,0 +1,122 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Index</title>
+    <meta name="description" content="une description">
+  </head>
+  <body>
+    <div id="todo">
+    </div>
+    <div id="footer" style="background:yellow"></div>
+    <script type="text/template" id="item-template">
+      <div>
+        <input type="checkbox" id="todo_complete" <%= completed ? 'checked="checked"' : '' %>>
+        <%= title %>
+      </div>
+    </script>
+    <script type="text/javascript" charset="utf-8" src="jquery.js"></script>
+    <script type="text/javascript" charset="utf-8" src="underscore.js"></script>
+    <script type="text/javascript" charset="utf-8" src="backbone.js"></script>
+    <script type="text/javascript" charset="utf-8">
+
+      var Person = new Backbone.Model({name: 'Jeremy'});
+
+      Person.validate = function(attrs) {
+        if(!attrs.name) {
+          return 'I need your name';
+        }
+      };
+
+      Person.set({name: 'Samuel'});
+      console.log(Person.get('name'));
+      Person.unset('name', {validate: true});
+
+      var Todo = Backbone.Model.extend({
+        defaults: {
+          completed: false
+        },
+
+        validate: function(attribs){
+          if (attribs.title === undefined){
+            return "Remember to set a title for your Todo.";
+          }
+        },
+
+        initialize: function(){
+          console.log('This model has been initialized.');
+          this.on("invalid", function(model,error){
+            console.log(error);
+          });
+        }
+      });
+      var myTodo = new Todo();
+      myTodo.set('completed',true, {validate: true});
+      console.log('completed: ' + myTodo.get('completed'));
+
+      var TodosView = Backbone.View.extend({
+        
+        tagName   : 'li',
+        className : 'container',
+        id        : 'todos',
+
+        todoTpl: _.template( "An example template" ),
+
+        events: {
+          'dbclick label' : 'edit',
+          'keypress .edit': 'updateonEnter',
+          'blur .edit'    : 'close' 
+        },
+
+        render: function() {
+          this.$el.html( this.todoTpl( this.model.toJSON() ) );
+          this.input = this.$('.edit');
+          return this;
+        },
+
+        edit: function() {
+          // executed when todo label is double-clicked
+        },
+
+        close: function() {
+          // executed when todo loses focus
+        },
+
+        updateOnEnter: function( e ) {
+          // executed on each keypress when in todo edit mode,
+        }
+      });
+
+      var todoView = new TodosView();
+      var todosView = new TodosView({el: $('#footer')});
+      console.log(todoView.el);
+      console.log(todosView.el);
+
+      // Simply created DOM elements
+      var button1 = $('<button></button>');
+      var button2 = $('<button></button>'); // return True
+
+      // Define a new view
+      var View = Backbone.View.extend({
+        events: {
+          click: function(e) {
+            console.log(view.el === e.target);
+          }
+        }
+      });
+
+      // Create a new instance of view, applying it to button1
+      var view = new View({el: button1});
+
+      // Apply the view to button2 using setElement
+      view.setElement(button2);
+      button1.trigger('click');
+      button2.trigger('click');
+
+      // Raw markup provided to setElement
+      var viewRaw = new Backbone.View;
+      viewRaw.setElement('<p><a><b>test</b></a></p>');
+      viewRaw.$('a b').html();
+    </script>
+  </body>
+</html>
