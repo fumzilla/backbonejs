@@ -61,3 +61,88 @@ var ListView = Backbone.View.extend({
     },this);
   }
 });
+
+//-------------------------------------------------------------
+
+var TotravelCollection = new Backbone.Collection();
+
+TotravelCollection.add([
+  { id: 1, title: 'go to Jamaicia.', completed: false },
+  { id: 2, title: 'go to China.', completed: false },
+  { id: 3, title: 'go to Paris.', completed: true }
+]);
+
+TotravelCollection.on("add", function(model) {
+  console.log("Added " + model.get('title'));
+});
+
+TotravelCollection.on("remove", function(model) {
+  console.log("Removed " + model.get('title'));
+});
+
+TotravelCollection.on("change:completed", function(model) {
+  console.log("Completed " + model.get('title'));
+});
+
+//-------------------------------------------------------------
+
+TotravelCollection.set([
+  { id: 1, title: 'go to Jamaicia.', completed: true },
+  { id: 2, title: 'go to China.', completed: false },
+  { id: 4, title: 'go to DansTonBraping.', completed: false }
+]);
+var People = new Backbone.Collection;
+
+People.comparator = function(a, b) {
+  return a.get('name') < b.get('name') ? -1 : 1;
+};
+
+var tom = new Backbone.Model({name: 'Tom'});
+var rob = new Backbone.Model({name: 'Rob'});
+var tim = new Backbone.Model({name: 'Tim'});
+var zob = new Backbone.Model({name: 'Zob'});
+var ank = new Backbone.Model({name: 'Ank'});
+
+
+People.add([tom, rob, tim, zob, ank]);
+
+console.log(People.indexOf(rob) === 0);
+console.log(People.indexOf(tim) === 1);
+console.log(People.indexOf(tom) === 2);
+console.log(JSON.stringify(People));
+
+//-------------------------------------------------------------
+
+var BoView = Backbone.View.extend({
+  el: '#booboo',
+
+  // bind to DOM event using event property
+  events: {
+    'click [type="checkbox"]': 'clicked',
+  },
+
+  initialize: function() {
+    // bind to DOM event using jQuery
+    this.$el.click(this.jqueryClicked);
+
+    // bien to API events
+    this.on('apiEvent', this.callback);
+  },
+
+  // 'this' is view
+  clicked: function(event) {
+    console.log('events handler for ' + this.el.outerHTML);
+    this.trigger('apiEvent', event.type);
+  },
+
+  // 'this' is handling DOM element
+  jqueryClicked: function(event) {
+    console.log('jQuery handler for ' + this.outerHTML);
+  },
+
+  callback: function(eventType) {
+    console.log('event type was ' + eventType);
+  }
+});
+
+var view = new BoView();
