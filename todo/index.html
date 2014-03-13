@@ -20,11 +20,30 @@
     <footer id="footer"></footer>
   </section>
 
-  <script type="text/template" id="item-template"></script>
-  <script type="text/template" id="stats-template"></script>
+  <!-- template for individual todo -->
+  <script type="text/template" id="item-template">
+    <div class="view">
+      <input class="toggle" type ="checkbox" <%= completed ? "checked" : "" %>>
+      <label><%- title %></label>
+      <button class="destroy"></button>
+    </div>
+    <input class="edit" value="<%- title %>">
+  </script>
+
+  <!-- template for stats -->
+  <script type="text/template" id="stats-template">
+    <span id="todo-count"><strong><%= remaining %></strong>
+    <%= remaining === 1 ? "item" : "items" %> left</span>
+    <ul id="filters">
+      <li><a class="selected" href="#/">All</a></li>
+      <li><a href="#/active">Active</a></li>
+      <li><a href="#/completed">Completed</a></li>
+    </ul>
+  </script>
+
   <script type="text/javascript" src="js/lib/jquery.js"></script>
   <script type="text/javascript" src="js/lib/backbone.js"></script>
-  <script type="text/javascript" src="js/lib/backbone.localStorage-min.js.js"></script>
+  <script type="text/javascript" src="js/lib/backbone.localStorage-min.js"></script>
   <script type="text/javascript" src="js/models/todo.js"></script>
   <script type="text/javascript" src="js/collections/todos.js"></script>
   <script type="text/javascript" src="js/views/todo.js"></script>
