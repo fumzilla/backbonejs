@@ -61,7 +61,7 @@ app.AppView = Backbone.View.extend({
     }
 
     this.allCheckbox.checked = !remaining;
-  };
+  },
 
   // Add a single todo item to the list by creating a view for it, and
   // appending its element to the `<ul>`.
@@ -78,7 +78,7 @@ app.AppView = Backbone.View.extend({
 
   filterOne: function( todo ){
     todo.trigger('visible');
-  };
+  },
 
   filterAll: function(){
     app.Todo.each(this.filterOne, this);
