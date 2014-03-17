@@ -81,7 +81,7 @@ app.AppView = Backbone.View.extend({
   },
 
   filterAll: function(){
-    app.Todo.each(this.filterOne, this);
+    app.Todos.each(this.filterOne, this);
   },
 
   // Generate attributes for a new todo item.
@@ -96,9 +96,9 @@ app.AppView = Backbone.View.extend({
   // Hit RETURN in the main input filed, create a new Todo model,
   // persisting it to localStorage.
   createOnEnter: function( event ){
-    if ( event.wich !== ENTER_KEY || !this.$input.val().trim() ) { return; }
+    if ( event.which !== ENTER_KEY || !this.$input.val().trim() ) { return; }
     app.Todos.create( this.newAttributes() );
-    this.$input.val();
+    this.$input.val('');
   },
 
   // Clear all completed todo items, destroying their models.
