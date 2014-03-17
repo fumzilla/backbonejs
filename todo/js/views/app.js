@@ -2,6 +2,11 @@ var app = app || {};
 
 // The Application
 // -----------------------
+// Fully documented base case
+// See it in action: http://todomvc.com/architecture-examples/backbone/
+// GitHub repo     : https://github.com/tastejs/todomvc/tree/gh-pages/architecture-examples/backbone
+// Commented Doc   : http://backbonejs.org/docs/backbone.html
+// eBook           : developing_backbone.js_applications.pdf
 
 // Our overall **AppView** is the top-level piece of UI.
 app.AppView = Backbone.View.extend({
@@ -51,7 +56,7 @@ app.AppView = Backbone.View.extend({
         completed: completed,
         remaining: remaining
       }));
-      this.$('#filter li a')
+      this.$('#filters li a')
         .removeClass('selected')
         .filter('[href="#/' + ( app.TodoFilter || '' ) + '"]')
         .addClass('selected');
