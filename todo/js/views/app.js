@@ -25,8 +25,8 @@ app.AppView = Backbone.View.extend({
     'click #toggle-all'      : 'toggleAllComplete'
   },
 
-  // At initialization we binf to the relevant events on the `Todos`
-  // collection, when iteùs are added or changed
+  // At initialization we bind to the relevant events on the `Todos`
+  // collection, when items are added or changed
   initialize: function(){
     this.allCheckbox = this.$('#toggle-all')[0];
     this.$input      = this.$('#new-todo');
@@ -98,7 +98,7 @@ app.AppView = Backbone.View.extend({
     };
   },
 
-  // Hit RETURN in the main input filed, create a new Todo model,
+  // Hit RETURN in the main input filed, create a new Todo model.
   // persisting it to localStorage.
   createOnEnter: function( event ){
     if ( event.which !== ENTER_KEY || !this.$input.val().trim() ) { return; }
