@@ -3,11 +3,13 @@ var app = app ||{};
 app.LibraryView = Backbone.View.extend({
   el: '#books',
 
-  initialize: function( initialBooks ){
-    this.collection = new app.Library( initialBooks );
-    this.render()
+  initialize: function(){
+    this.collection = new app.Library();  // Deleted argument, Library is now populated by database.
+    this.collection.fetch({reset: true});
+    this.render();
 
     this.listenTo( this.collection, 'add', this.renderBook );
+    this.listenTo( this.collection, 'reset', this.render );
   },
 
   events:{

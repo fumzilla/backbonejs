@@ -25,8 +25,12 @@
     <ul>
       <li><%= title %></li>
       <li><%= author %></li>
-      <li><%= releaseDate %></li>
-      <li><%= keywords %></li>
+      <li><%= $.format.date( new Date( releaseDate ), 'MMMM yyyy' ) %></li>
+      <li><%
+      // Iterating keywords objects with Underscore `each` method
+      // and microtemplating utilities to display it.
+      _.each( keywords, function( keyobj ) { %>
+        <%= keywords %><% } ); %></li>
     </ul>
     <button class="delete">Delete</button>
   </script>
@@ -34,6 +38,7 @@
   <script type="text/javascript" src="js/lib/jquery.js"></script>
   <script type="text/javascript" src="js/lib/underscore.js"></script>
   <script type="text/javascript" src="js/lib/backbone.js"></script>
+  <script type="text/javascript" src="js/lib/jquery-dateFormat.js"></script>
   <script type="text/javascript" src="js/models/book.js"></script>
   <script type="text/javascript" src="js/collections/library.js"></script>
   <script type="text/javascript" src="js/views/book.js"></script>

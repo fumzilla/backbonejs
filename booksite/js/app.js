@@ -14,5 +14,7 @@ $(function() {
       releaseDate: '2011', keywords: 'JavaScript Programming' },
   ];
 
-  new app.LibraryView( books );
+  // Pass `books` object as argument to populate app without
+  // database support, as a sample.
+  new app.LibraryView();
 });
