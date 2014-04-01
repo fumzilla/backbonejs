@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <title>Backbone.js Library</title>
   <link rel="stylesheet" href="css/screen.css" type="text/css" media="screen" charset="utf-8">
+  <link rel="stylesheet" href="css/cupertino/jquery-ui-1.10.4.custom.css"type="text/css" media="screen" charset="utf-8">
 </head>
 <body>
   <div id="books">
@@ -30,12 +31,13 @@
       // Iterating keywords objects with Underscore `each` method
       // and microtemplating utilities to display it.
       _.each( keywords, function( keyobj ) { %>
-        <%= keywords %><% } ); %></li>
+        <%= keyobj.keyword %><% } ); %></li>
     </ul>
     <button class="delete">Delete</button>
   </script>
 
   <script type="text/javascript" src="js/lib/jquery.js"></script>
+  <script type="text/javascript" src="js/lib/jquery-ui-1.10.4.custom.js"></script>
   <script type="text/javascript" src="js/lib/underscore.js"></script>
   <script type="text/javascript" src="js/lib/backbone.js"></script>
   <script type="text/javascript" src="js/lib/jquery-dateFormat.js"></script>

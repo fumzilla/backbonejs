@@ -1,0 +1,70 @@
+<html>
+<head>
+</head>
+<body>
+<script type="text/html" id="myViewTemplate">
+  <div class="row">
+    <label>First Name:</label>
+    <span><%= firstName %></span>
+  </div>
+  <div class="row">
+    <label>Last Name:</label>
+    <span><%= lastName %></span>
+  </div>
+  <div class="row">
+    <label>Email:</label>
+    <span><%= email %></span>
+  </div>
+</script>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="underscore.js"></script>
+  <script type="text/javascript" src="backbone.js"></script>
+  <script type="text/javascript" src="backbone.marionette.js"></script>
+
+  <script type="text/javascript">
+    // Typical Backbone View
+    var MyView = Backbone.View.extend({
+      template: $( '#myViewTemplate' ).html(),
+
+      render: function(){
+        
+        // Compiles the Underscore.js template.
+        var compiledTemplate = _.template(this.template);
+
+        // Render the template with the model data.
+        var data = this.model.toJSON();
+        var html = compiledTemplate(data);
+
+        // Populate the view with the rendered HTML.
+        this.$el.html(html);
+      }
+    });
+
+    // Marionette.JS View style
+    var AnotherView = Marionette.ItemView.extend({
+      template: '#myViewTemplate'
+    });
+
+    var Person = Backbone.Model.extend({
+      default : {
+        firstName : 'First Name',
+        lastName  : 'Last Name',
+        email     : ''
+      }
+    });
+
+    var Derick = new Person({
+      firstName : 'Derick',
+      lastName  : 'Bailey',
+      email     : 'derickbailey@example.com'
+    });
+
+    //var myView = new MyView({ model: Derick });   // Classic Backbone.js
+    var myView = new AnotherView({model: Derick});  // Marionette.js
+    myView.render();
+    myView.show();
+    $( 'body' ).html(myView.el);
+</script>
+
+</body>
+</html>

@@ -146,3 +146,40 @@ var BoView = Backbone.View.extend({
 });
 
 var view = new BoView();
+
+//-------------------------------------------------------------
+// Since the original view is still in scope, and the second view instance is also in scope,
+// changing data on the model will cause both view instances to respond.
+//-------------------------------------------------------------
+
+var ZombieView = Backbone.View.extend({
+  template: '#my-view-template',
+  initialize: function(){
+    this.model.on('change', this.render, this);
+  },
+  render: function(){ alert('We`re rendering the view'); }
+});
+
+var Person = Backbone.Model.extend({
+  defaults: {
+    firstName : 'Jeremy',
+    lastName  : 'Boutrosse',
+    email     : 'jeremy@example.com'
+  }
+});
+
+var Derick = new Person({
+  firstName : 'Derick',
+  lastName  : 'Baley',
+  email     : 'derick@example.com'
+});
+
+var zombieView = new ZombieView({
+  model: Derick
+});
+
+zombieView = new ZombieView({
+  model: Derick
+});
+
+Derick.set('email','derickbailey@example.com');

@@ -14,6 +14,9 @@ $(function() {
       releaseDate: '2011', keywords: 'JavaScript Programming' },
   ];
 
+  // Bind a jQueryUI date picker to our releaseDate field:
+  $( '#releaseDate' ).datepicker();
+
   // Pass `books` object as argument to populate app without
   // database support, as a sample.
   new app.LibraryView();
